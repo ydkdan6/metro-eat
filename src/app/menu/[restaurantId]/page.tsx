@@ -9,7 +9,7 @@ interface MenuItem {
   name: string;
   description: string;
   price: number;
-  image: string; // Add image field to the interface
+  image: string;
 }
 
 const MenuPage: React.FC = () => {
@@ -76,7 +76,7 @@ const MenuPage: React.FC = () => {
           </h1>
       </header>
 
-      <div className="mt-4 max-w-4xl mx-auto px-4">
+      <div className="mt-4  max-w-4xl mx-auto px-4">
         {filteredMenuItems.length > 0 ? (
           filteredMenuItems.map((item, index) => (
             <div
@@ -86,7 +86,7 @@ const MenuPage: React.FC = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-16 h-16 object-cover rounded-md"
+                className="w-16 h-16 object-cover rounded-3xl"
               />
               <div className="ml-4 flex-1">
                 <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
@@ -117,7 +117,7 @@ const MenuPage: React.FC = () => {
               <div className="ml-4 flex flex-col items-center">
                 {/* Heart Icon */}
                 <button className="mb-6 ml-7 p-1 text-red-500 transition-colors duration-200">
-                  <HeartIcon className="h-8 w-8 fill-orange-200" />
+                  <HeartIcon className="h-8 w-8 fill-white" />
                 </button>
 
                 {/* Order Button */}
