@@ -1,15 +1,21 @@
 "use client";
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext'; // Import the Cart context
 
 const Cart = () => {
+  const router = useRouter();
   const { cartItems, removeFromCart } = useCart(); // Get cartItems and removeFromCart
 
   // Calculate subtotal, discount, and total
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const discount = 1200; // Example discount
   const total = subtotal - discount;
+
+  const handleBackBtn = () => {
+    router.push('/');
+  }
 
   return (
     <div className="bg-gray-50 p-4 min-h-screen">
@@ -70,7 +76,8 @@ const Cart = () => {
           <button className="w-full bg-orange-500 text-white py-3 rounded-lg mb-2">
             Proceed to Checkout
           </button>
-          <button className="w-full bg-gray-100 text-orange-500 py-3 rounded-lg">
+          <button className="w-full bg-gray-100 text-orange-500 py-3 rounded-lg"
+          onClick={ () => handleBackBtn()}>
             Continue Shopping
           </button>
         </div>
