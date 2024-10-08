@@ -126,8 +126,9 @@ const MenuPage = () => {
 
                 {/* Order Button */}
                 <button
-                  className="bg-orange-500 text-white px-4 py-2 rounded-lg mt-5"
+                  className={`bg-orange-500 text-white px-4 py-2 rounded-lg mt-5  ${quantities[item.id] > 0 ? '' : 'opacity-50 cursor-not-allowed'}`}
                   onClick={() => handleOrder(item)}
+                  disabled={quantities[item.id] === 0}
                 >
                   Order
                 </button>

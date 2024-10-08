@@ -1,12 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, {useState} from 'react';
 import { useRouter } from 'next/navigation';
+import Modal from './Modal/Modal';
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css';
 import { useCart } from '@/context/CartContext'; // Import the Cart context
 
 const Cart = () => {
   const router = useRouter();
   const { cartItems, removeFromCart } = useCart(); // Get cartItems and removeFromCart
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Calculate subtotal, discount, and total
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -16,6 +20,26 @@ const Cart = () => {
   const handleBackBtn = () => {
     router.push('/');
   }
+
+ // Handle checkout button click
+ const handleCheckout = () => {
+  if (cartItems.length === 0) {
+    // Show warning toast if the cart is empty
+    toast.warn("Your cart is empty! Add items before proceeding to checkout.", {
+      position: "top-right",
+      autoClose: 3000, // Automatically close after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  } else {
+    // Add any additional checkout logic here (e.g., processing payment)
+    setIsModalOpen(true); // Open the modal if there are items in the cart
+  }
+};
 
   return (
     <div className="bg-gray-50 p-4 min-h-screen">
@@ -73,7 +97,8 @@ const Cart = () => {
 
         {/* Buttons */}
         <div className="mt-6">
-          <button className="w-full bg-orange-500 text-white py-3 rounded-lg mb-2">
+          <button className="w-full bg-orange-500 text-white py-3 rounded-lg mb-2"
+          onClick={handleCheckout}>
             Proceed to Checkout
           </button>
           <button className="w-full bg-gray-100 text-orange-500 py-3 rounded-lg"
@@ -82,6 +107,10 @@ const Cart = () => {
           </button>
         </div>
       </div>
+      {/* Modal Component */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+      <ToastContainer />
     </div>
   );
 };
