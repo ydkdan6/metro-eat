@@ -17,10 +17,10 @@ const MenuPage = () => {
 
   // Mock menu data
   const menuItems = [
-    { name: 'Jollof Rice', description: 'Delicious jollof rice', price: 3000, image: '/images/image2.jpeg' },
-    { name: 'Fried Rice', description: 'Tasty fried rice', price: 2500, image: '/images/img1.jpeg' },
-    { name: 'Spaghetti', description: 'Italian spaghetti', price: 2000, image: '/images/image2.jpeg' },
-    { name: 'Afang Soup', description: 'Traditional soup', price: 3000, image: '/images/img1.jpeg' },
+    { id: 1, name: 'Jollof Rice', description: 'Delicious jollof rice', price: 3000, image: '/images/image2.jpeg' },
+    { id: 2,  name: 'Fried Rice', description: 'Tasty fried rice', price: 2500, image: '/images/img1.jpeg' },
+    { id: 3, name: 'Spaghetti', description: 'Italian spaghetti', price: 2000, image: '/images/image2.jpeg' },
+    { id: 4,  name: 'Afang Soup', description: 'Traditional soup', price: 3000, image: '/images/img1.jpeg' },
   ];
 
   useEffect(() => {
@@ -34,7 +34,8 @@ const MenuPage = () => {
 
   // Handle Order Button Click
   const handleOrder = (item) => {
-    addToCart(item); // Add the item to the cart
+    const quantity = quantities[item.id] || 0;
+    addToCart({ ...item, quantity }); // Add the item to the cart
     router.push('/orders'); // Navigate to the cart page after adding the item
   };
 
@@ -99,16 +100,16 @@ const MenuPage = () => {
                 {/* Quantity Control Buttons */}
                 <div className="mt-4 flex items-center space-x-2">
                   <button
-                    onClick={() => decreaseQuantity(index)}
+                    onClick={() => decreaseQuantity(item.id)}
                     className="bg-white text-orange-500 px-2 py-[2px] rounded-lg"
                   >
                     -
                   </button>
                   <span className="text-gray-800 font-semibold">
-                    {quantities[index] || 0}
+                    {quantities[item.id] || 0}
                   </span>
                   <button
-                    onClick={() => increaseQuantity(index)}
+                    onClick={() => increaseQuantity(item.id)}
                     className="bg-white text-orange-500 px-2 py-[2px] rounded-lg"
                   >
                     +

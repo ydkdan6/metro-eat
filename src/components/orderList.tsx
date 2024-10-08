@@ -6,6 +6,7 @@ import { useCart } from '@/context/CartContext'; // Import the Cart context
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart(); // Get cartItems and removeFromCart
 
+  // Calculate subtotal, discount, and total
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const discount = 1200; // Example discount
   const total = subtotal - discount;
@@ -22,6 +23,7 @@ const Cart = () => {
                 <p className="font-semibold">{item.name}</p>
                 <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
               </div>
+              {/* Display the price multiplied by the quantity correctly */}
               <p className="font-bold">₦{item.price * item.quantity}</p>
               <button
                 onClick={() => removeFromCart(item.name)}
