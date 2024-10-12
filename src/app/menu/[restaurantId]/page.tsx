@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { HeartIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/navigation'; // Correct router import for the new App Directory
 import { useCart } from '@/context/CartContext'; // Import your cart context
+import 'animate.css';
 
 const MenuPage = () => {
   const router = useRouter(); // Initialize the router hook from next/navigation
@@ -85,7 +86,7 @@ const MenuPage = () => {
           filteredMenuItems.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-4 mb-4 bg-gray-50 rounded-lg shadow-md"
+              className="flex items-center justify-between p-4 mb-4 bg-gray-50 rounded-lg shadow-md animate__animated animate__backInDown"
             >
               <img
                 src={item.image}
